@@ -1,19 +1,124 @@
 {
-  "posts": [
+  "users": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "uuid": "4b71de91-c055-4702-9818-11b950bac194",
+      "name": "Evren Ceyhan",
+      "handle": "webceyhan",
+      "bio": "Software Engineer with a passion for building scalable web applications.",
+      "link": "https://www.ceyhan.io",
+      "avatarUrl": "https://i.pravatar.cc/150?img=60",
+      "instagramUrl": "https://www.instagram.com/webceyhan",
+      "followers": [
+        {
+          "uuid": "9a6e406e-44a7-4430-acce-62145189496a"
+        },
+        {
+          "uuid": "f5df573f-7a45-40ff-b7da-c84712d32772"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "uuid": "9a6e406e-44a7-4430-acce-62145189496a",
+      "name": "John Doe",
+      "handle": "johndoe",
+      "bio": "An ordinary person who loves to cook and eat.",
+      "link": "https://www.johndoe.com",
+      "avatarUrl": "https://i.pravatar.cc/150?img=69",
+      "instagramUrl": "https://www.instagram.com/johndoe",
+      "followers": [
+        {
+          "uuid": "4b71de91-c055-4702-9818-11b950bac194"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "uuid": "f5df573f-7a45-40ff-b7da-c84712d32772",
+      "name": "Melanie Turner",
+      "handle": "melturner",
+      "bio": "Life is a journey, not a destination. Join me to enjoy the ride.",
+      "link": "https://www.linktree.com/melturner",
+      "avatarUrl": "https://i.pravatar.cc/150?img=45",
+      "instagramUrl": "https://www.instagram.com/melturner",
+      "followers": [
+        {
+          "uuid": "4b71de91-c055-4702-9818-11b950bac194"
+        },
+        {
+          "uuid": "9a6e406e-44a7-4430-acce-62145189496a"
+        }
+      ]
     }
   ],
-  "comments": [
+  "threads": [
     {
       "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "timestamp": "2023-07-12T22:33:00.000Z",
+      "from": "4b71de91-c055-4702-9818-11b950bac194",
+      "to": null,
+      "replyTo": null,
+      "text": "Hello World! This is my first thread.",
+      "likes": [
+        {
+          "uuid": "9a6e406e-44a7-4430-acce-62145189496a"
+        },
+        {
+          "uuid": "f5df573f-7a45-40ff-b7da-c84712d32772"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "timestamp": "2023-07-12T22:45:00.000Z",
+      "from": "4b71de91-c055-4702-9818-11b950bac194",
+      "to": null,
+      "replyTo": null,
+      "text": "This is my second thread. Still testing..",
+      "likes": [
+        {
+          "uuid": "9a6e406e-44a7-4430-acce-62145189496a"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "timestamp": "2023-07-12T22:50:00.000Z",
+      "from": "9a6e406e-44a7-4430-acce-62145189496a",
+      "to": null,
+      "replyTo": null,
+      "text": "I made a delicious cake today. Check it out!",
+      "likes": [
+        {
+          "uuid": "4b71de91-c055-4702-9818-11b950bac194"
+        },
+        {
+          "uuid": "f5df573f-7a45-40ff-b7da-c84712d32772"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "timestamp": "2023-07-12T22:55:00.000Z",
+      "from": "4b71de91-c055-4702-9818-11b950bac194",
+      "to": "9a6e406e-44a7-4430-acce-62145189496a",
+      "replyTo": 3,
+      "text": "Wow! It looks delicious. I want to try it.",
+      "likes": [
+        {
+          "uuid": "9a6e406e-44a7-4430-acce-62145189496a"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "timestamp": "2023-07-12T23:00:00.000Z",
+      "from": "f5df573f-7a45-40ff-b7da-c84712d32772",
+      "to": "9a6e406e-44a7-4430-acce-62145189496a",
+      "replyTo": 3,
+      "text": "I want to try it too!",
+      "likes": []
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
