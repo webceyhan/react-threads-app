@@ -1,23 +1,18 @@
+:root {
+    --primary-color: rgb(255, 255, 255);
+    --secondary-color: rgb(120, 120, 120);
+}
+
 body {
     margin: 0;
     padding: 0;
-    color: rgb(255, 255, 255);
+    color: var(--primary-color);
     background-color: rgb(0, 0, 0);
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     height: 100vh;
     align-items: center;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 20px;
-}
-
-svg {
-    fill: rgb(255, 255, 255);
 }
 
 #root {
@@ -28,4 +23,82 @@ svg {
     border-radius: 40px;
     box-sizing: border-box;
     background-color: rgb(15, 18, 38);
+}
+
+h1,
+h2,
+p {
+    margin: 4px;
+    padding: 0;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+header .info-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+header .img-container {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+header .img-container img {
+    height: 110%;
+}
+
+header .threads-info {
+    color: var(--secondary-color);
+    background-color: rgba(59, 59, 59, 0.5);
+    font-size: 13px;
+    padding: 3px 6px;
+    border-radius: 20px;
+}
+
+svg {
+    fill: var(--primary-color);
+}
+
+button {
+    padding: 7px;
+    font-weight: bold;
+    color: var(--primary-color);
+    background-color: transparent;
+    border: var(--secondary-color) 1px solid;
+}
+
+button.primary {
+    width: 100%;
+    margin: 15px 0;
+    border-radius: 7px;
+}
+
+.button-container button {
+    width: 50%;
+    border: none;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.button-container button.active {
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.subtext {
+    color: var(--secondary-color);
 }
