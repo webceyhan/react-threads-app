@@ -102,3 +102,34 @@ button.primary {
 .subtext {
     color: var(--secondary-color);
 }
+
+.feed {
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.feed-card {
+    border-bottom: 1px solid var(--secondary-color);
+    padding: 10px 0;
+}
+
+.feed-card .text-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.feed-card .img-container {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.feed-card .img-container img {
+    height: 110%;
+}
+
+.feed-card .icons svg {
+    height: 20px;
+    padding: 0 5px;
+}

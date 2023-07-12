@@ -2,10 +2,10 @@ import Thread from './Thread';
 
 export default function Feed() {
     return (
-        <main>
+        <div className="feed">
             <Thread />
             <Thread />
             <Thread />
-        </main>
+        </div>
     );
 }
