@@ -3,7 +3,7 @@ import ThreadForm from './ThreadForm';
 
 export default function SlideUp() {
     return (
-        <div>
+        <div className="slideup">
             <Thread />
             <Thread />
             <ThreadForm />
