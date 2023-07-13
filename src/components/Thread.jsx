@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react';
 import { ago, fetchApi } from '../utils';
 
-export default function Thread({ user, thread, setViewSlideUp, setSelectedThread }) {
+export default function Thread({
+    user,
+    thread,
+    setViewSlideUp,
+    setSelectedThread,
+}) {
     const [wasLiked, setWasLiked] = useState(false);
+    const [repliesCount, setRepliesCount] = useState(0);
 
     useEffect(() => {
+        countReplies();
         setWasLiked(checkIfLiked());
     }, [thread]);
 
@@ -14,6 +21,12 @@ export default function Thread({ user, thread, setViewSlideUp, setSelectedThread
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(thread),
         });
+    };
+
+    const countReplies = async () => {
+        setRepliesCount(
+            (await fetchApi(`threads?replyTo=${thread.id}`)).length
+        );
     };
 
     const checkIfLiked = () => {
@@ -105,7 +118,7 @@ export default function Thread({ user, thread, setViewSlideUp, setSelectedThread
                 </svg>
             </div>
             <p className="subtext">
-                <span onClick={() => setViewSlideUp(true)}>X replies</span> •{' '}
+                <span onClick={handleReply}>{repliesCount} replies</span> •{' '}
                 <span>{thread.likes.length} likes</span>
             </p>
         </article>
