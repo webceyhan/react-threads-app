@@ -58,6 +58,11 @@ export default function App() {
         setThreads([thread, ...threads]);
     };
 
+    const handleSlideUpToggle = () => {
+        setSelectedThread(null);
+        setViewSlideUp(!viewSlideUp);
+    };
+
     useEffect(() => {
         loadUser();
     }, []);
@@ -105,7 +110,7 @@ export default function App() {
 
                     <button
                         className="slideup-toggle"
-                        onClick={() => setViewSlideUp(true)}
+                        onClick={handleSlideUpToggle}
                     >
                         <WriteIcon />
                     </button>
