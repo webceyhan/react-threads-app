@@ -18,8 +18,7 @@ const ago = (timestamp) => {
     return formatter.format(-Math.floor(elapsed / (60 * 60 * 24)), 'days');
 };
 
-export default function Thread({ user, thread }) {
-
+export default function Thread({ user, thread, setViewSlideUp }) {
     const timePassed = ago(thread.timestamp);
 
     return (
@@ -39,6 +38,7 @@ export default function Thread({ user, thread }) {
             <p>{thread.text}</p>
 
             <div className="icons">
+                {/* like */}
                 <svg
                     clipRule="evenodd"
                     fillRule="evenodd"
@@ -52,7 +52,10 @@ export default function Thread({ user, thread }) {
                         fillRule="nonzero"
                     />
                 </svg>
+
+                {/* comment */}
                 <svg
+                    onClick={() => setViewSlideUp(true)}
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -60,6 +63,8 @@ export default function Thread({ user, thread }) {
                 >
                     <path d="M12 3c5.514 0 10 3.476 10 7.747 0 4.272-4.48 7.748-9.986 7.748-.62 0-1.092-.046-1.759-.097-1 .776-1.774 1.403-3.485 1.962.26-1.383-.113-2.259-.514-3.259-2.383-1.505-4.256-3.411-4.256-6.354 0-4.271 4.486-7.747 10-7.747zm0-2c-6.627 0-12 4.363-12 9.747 0 3.13 1.816 5.916 4.641 7.699.867 2.167-1.084 4.008-3.143 4.502 3.085.266 6.776-.481 9.374-2.497 7.08.54 13.128-3.988 13.128-9.704 0-5.384-5.373-9.747-12-9.747z" />
                 </svg>
+
+                {/* share */}
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -68,6 +73,8 @@ export default function Thread({ user, thread }) {
                 >
                     <path d="M5 10v7h10.797l1.594 2h-14.391v-9h-3l4-5 4 5h-3zm14 4v-7h-10.797l-1.594-2h14.391v9h3l-4 5-4-5h3z" />
                 </svg>
+
+                {/* send */}
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -78,7 +85,7 @@ export default function Thread({ user, thread }) {
                 </svg>
             </div>
             <p className="subtext">
-                <span>X replies</span> •{' '}
+                <span onClick={() => setViewSlideUp(true)}>X replies</span> •{' '}
                 <span>{thread.likes.length} likes</span>
             </p>
         </article>

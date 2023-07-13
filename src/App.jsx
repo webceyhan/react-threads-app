@@ -59,14 +59,21 @@ export default function App() {
             {user && (
                 <div>
                     <Nav url={user.instagramUrl} />
+
                     <Header
                         user={user}
                         viewThreadsFeed={viewThreadsFeed}
                         setViewThreadsFeed={setViewThreadsFeed}
                     />
-                    <Feed user={user} threads={filteredThreads} />
+                    <Feed
+                        user={user}
+                        threads={filteredThreads}
+                        setViewSlideUp={setViewSlideUp}
+                    />
 
-                    {viewSlideUp && <SlideUp {...{ user, setViewSlideUp }} />}
+                    {viewSlideUp && (
+                        <SlideUp user={user} setViewSlideUp={setViewSlideUp} />
+                    )}
 
                     <button
                         className="slideup-toggle"
