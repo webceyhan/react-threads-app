@@ -10,6 +10,7 @@ export default function ThreadForm({ user, text, setText, postThread }) {
                 value={text}
                 onChange={(event) => setText(event.target.value)}
                 placeholder="What's on your mind?"
+                autoFocus
             />
 
             <button className="primary" onClick={postThread}>
