@@ -1,7 +1,4 @@
-const shortenUrl = (url) => {
-    const { hostname, pathname } = new URL(url);
-    return hostname.replace('www.', '') + pathname;
-};
+import { shortenUrl } from '../utils';
 
 export default function Header({ user, viewThreadsFeed, setViewThreadsFeed }) {
     return (
