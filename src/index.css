@@ -132,7 +132,7 @@ button.primary {
 
 .feed-card {
     border-bottom: 1px solid var(--secondary-color);
-    padding: 10px 0;
+    padding: 15px 0;
 }
 
 .feed-card .text-container,
