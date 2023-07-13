@@ -90,6 +90,7 @@ A GitHub Action will automatically deploy the project to Netlify on every push.
 
 -   [Node.js](https://nodejs.dev/)
 -   [React](https://reactjs.org/)
+-   [iconmonstr](https://iconmonstr.com/)
 -   [JsonServer](https://github.com/typicode/json-server)
 -   [GitHub Actions](https://docs.github.com/en/actions)
     -   [Netlify](https://www.netlify.com/)
