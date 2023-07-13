@@ -56,6 +56,12 @@ export default function App() {
 
         // add new thread to the top of the list
         setThreads([thread, ...threads]);
+
+        // reset text input
+        setText('');
+
+        // close slideup
+        setViewSlideUp(false);
     };
 
     const handleSlideUpToggle = () => {
