@@ -1,20 +1,15 @@
 import { useEffect, useState } from 'react';
-import {
-    createThread,
-    findThreadsByUser,
-    findRepliesByThread,
-    findUser,
-} from './api';
+import { createThread, findThreadsByUser, findRepliesByThread } from './api';
+import { useAuth } from './providers/AuthProvider';
 import { WriteIcon } from './icons';
 import Feed from './components/Feed';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import SlideUp from './components/SlideUp';
 
-const loggedUserId = 1;
-
 export default function App() {
-    const [user, setUser] = useState(null);
+    const { user, loadUser } = useAuth();
+
     const [threads, setThreads] = useState([]);
     const [filteredThreads, setFilteredThreads] = useState([]);
     const [selectedThread, setSelectedThread] = useState(null);
@@ -22,10 +17,6 @@ export default function App() {
     const [viewThreadsFeed, setViewThreadsFeed] = useState(true);
     const [viewSlideUp, setViewSlideUp] = useState(false);
     const [text, setText] = useState('');
-
-    const loadUser = async () => {
-        setUser(await findUser(loggedUserId));
-    };
 
     const loadThreads = async () => {
         setThreads(await findThreadsByUser(user?.uuid));
@@ -40,9 +31,7 @@ export default function App() {
     };
 
     const loadSelectedThreadReplies = async () => {
-        setSelectedThreadReplies(
-            await findRepliesByThread(selectedThread?.id)
-        );
+        setSelectedThreadReplies(await findRepliesByThread(selectedThread?.id));
     };
 
     const postThread = async () => {
