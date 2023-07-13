@@ -1,8 +1,22 @@
 import { ago, fetchApi } from '../utils';
 
 export default function Thread({ user, thread, setViewSlideUp }) {
+    const checkIfLiked = () => {
+        return thread.likes.some(({ uuid }) => uuid === user.uuid);
+    };
+
     const handleLike = async () => {
         thread.likes.push({ uuid: user.uuid });
+
+        await fetchApi(`threads/${thread.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(thread),
+        });
+    };
+
+    const handleUnlike = async () => {
+        thread.likes = thread.likes.filter(({ uuid }) => uuid !== user.uuid);
 
         await fetchApi(`threads/${thread.id}`, {
             method: 'PUT',
@@ -30,7 +44,9 @@ export default function Thread({ user, thread, setViewSlideUp }) {
             <div className="icons">
                 {/* like */}
                 <svg
-                    onClick={handleLike}
+                    onClick={() =>
+                        checkIfLiked() ? handleUnlike() : handleLike()
+                    }
                     clipRule="evenodd"
                     fillRule="evenodd"
                     strokeLinejoin="round"
