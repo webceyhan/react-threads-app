@@ -166,3 +166,17 @@ button.primary {
         0 0 40px rgba(0, 0, 0, 0.5), 0 0 80px rgba(0, 0, 0, 0.5);
     transition: all 0.5s ease-in-out;
 }
+
+.slideup button.close {
+    border: none;
+}
+
+.slideup-toggle {
+    display: block;
+    width: 100%;
+    border: none;
+}
+
+.slideup-toggle svg {
+    height: 40px;
+}

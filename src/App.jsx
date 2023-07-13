@@ -3,6 +3,7 @@ import Feed from './components/Feed';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import SlideUp from './components/SlideUp';
+import WriteIcon from './components/WriteIcon';
 
 const loggedUserId = 1;
 
@@ -23,6 +24,7 @@ export default function App() {
     const [threads, setThreads] = useState([]);
     const [filteredThreads, setFilteredThreads] = useState([]);
     const [viewThreadsFeed, setViewThreadsFeed] = useState(true);
+    const [viewSlideUp, setViewSlideUp] = useState(false);
 
     const loadUser = async () => {
         setUser(await fetchApi(`users/${loggedUserId}`));
@@ -63,7 +65,15 @@ export default function App() {
                         setViewThreadsFeed={setViewThreadsFeed}
                     />
                     <Feed user={user} threads={filteredThreads} />
-                    {/* <SlideUp /> */}
+
+                    {viewSlideUp && <SlideUp {...{ user, setViewSlideUp }} />}
+
+                    <button
+                        className="slideup-toggle"
+                        onClick={() => setViewSlideUp(true)}
+                    >
+                        <WriteIcon />
+                    </button>
                 </div>
             )}
         </>

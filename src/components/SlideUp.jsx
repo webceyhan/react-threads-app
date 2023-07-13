@@ -1,11 +1,14 @@
 import Thread from './Thread';
 import ThreadForm from './ThreadForm';
 
-export default function SlideUp() {
+export default function SlideUp({ user, setViewSlideUp }) {
     return (
         <div className="slideup">
-            <Thread />
-            <Thread />
+            <button className="close" onClick={() => setViewSlideUp(false)}>
+                X
+            </button>
+            {/* <Thread /> */}
+            {/* <Thread /> */}
             <ThreadForm />
         </div>
     );
