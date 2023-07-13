@@ -1,23 +1,32 @@
-export default function Header() {
+const shortenUrl = (url) => {
+    const { hostname, pathname } = new URL(url);
+    return hostname.replace('www.', '') + pathname;
+};
+
+export default function Header({ user }) {
     return (
         <header>
             <div className="info-container">
                 <div className="user-info-container">
-                    <h1>user name</h1>
+                    <h1>{user.name}</h1>
                     <p>
-                        handle <span className="threads-info">threads.net</span>
+                        {user.handle}
+                        <span className="threads-info">threads.net</span>
                     </p>
                 </div>
                 <div className="img-container">
-                    <img src="" alt="avatar" />
+                    <img src={user.avatarUrl} alt="avatar" />
                 </div>
             </div>
 
-            <p>bio</p>
+            <p>{user.bio}</p>
 
             <div className="stats-container">
                 <p className="subtext">
-                    X followers - <a href="#">link</a>
+                    {user.followers.length} followers •{' '}
+                    <a href={user.link} target="__blank">
+                        {shortenUrl(user.link)}
+                    </a>
                 </p>
             </div>
 

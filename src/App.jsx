@@ -34,7 +34,7 @@ export default function App() {
             {user && (
                 <div>
                     <Nav url={user.instagramUrl} />
-                    <Header />
+                    <Header user={user} />
                     <Feed />
                     {/* <SlideUp /> */}
                 </div>
