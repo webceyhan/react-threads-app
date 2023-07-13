@@ -1,6 +1,13 @@
+import { useEffect, useState } from 'react';
 import { ago, fetchApi } from '../utils';
 
 export default function Thread({ user, thread, setViewSlideUp }) {
+    const [wasLiked, setWasLiked] = useState(false);
+
+    useEffect(() => {
+        setWasLiked(checkIfLiked());
+    }, [thread]);
+
     const updateThread = async () => {
         await fetchApi(`threads/${thread.id}`, {
             method: 'PUT',
@@ -24,6 +31,7 @@ export default function Thread({ user, thread, setViewSlideUp }) {
             thread.likes.push({ uuid: user.uuid });
         }
         updateThread();
+        setWasLiked(checkIfLiked());
     };
 
     return (
@@ -46,6 +54,7 @@ export default function Thread({ user, thread, setViewSlideUp }) {
                 {/* like */}
                 <svg
                     onClick={handleToggleLike}
+                    className={wasLiked ? 'liked' : ''}
                     clipRule="evenodd"
                     fillRule="evenodd"
                     strokeLinejoin="round"
