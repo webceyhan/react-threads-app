@@ -16,6 +16,7 @@ export default function App() {
     const [selectedThreadReplies, setSelectedThreadReplies] = useState([]);
     const [viewThreadsFeed, setViewThreadsFeed] = useState(true);
     const [viewSlideUp, setViewSlideUp] = useState(false);
+    const [text, setText] = useState('');
 
     const loadUser = async () => {
         setUser(await fetchApi(`users/${loggedUserId}`));
@@ -37,6 +38,24 @@ export default function App() {
         setSelectedThreadReplies(
             await fetchApi(`threads?replyTo=${selectedThread?.id}`)
         );
+    };
+
+    const postThread = async () => {
+        const thread = await fetchApi('threads', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                from: user.uuid,
+                to: null,
+                replyTo: null,
+                text,
+                timestamp: new Date().toISOString(),
+                likes: [],
+            }),
+        });
+
+        // add new thread to the top of the list
+        setThreads([thread, ...threads]);
     };
 
     useEffect(() => {
@@ -78,6 +97,9 @@ export default function App() {
                             user={user}
                             threads={selectedThreadReplies}
                             setViewSlideUp={setViewSlideUp}
+                            text={text}
+                            setText={setText}
+                            postThread={postThread}
                         />
                     )}
 

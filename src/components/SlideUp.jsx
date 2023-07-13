@@ -1,7 +1,14 @@
 import SlideUpThread from './SlideUpThread';
 import ThreadForm from './ThreadForm';
 
-export default function SlideUp({ user, threads, setViewSlideUp }) {
+export default function SlideUp({
+    user,
+    threads,
+    setViewSlideUp,
+    text,
+    setText,
+    postThread,
+}) {
     return (
         <div className="slideup">
             <button className="close" onClick={() => setViewSlideUp(false)}>
@@ -18,7 +25,12 @@ export default function SlideUp({ user, threads, setViewSlideUp }) {
                 ))}
             </div>
 
-            <ThreadForm />
+            <ThreadForm
+                user={user}
+                text={text}
+                setText={setText}
+                postThread={postThread}
+            />
         </div>
     );
 }
