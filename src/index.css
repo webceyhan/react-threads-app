@@ -72,6 +72,8 @@ header .threads-info {
 }
 
 svg {
+    width: 24px;
+    height: 24px;
     fill: var(--primary-color);
 }
 

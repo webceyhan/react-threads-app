@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { fetchApi } from './utils';
+import { WriteIcon } from './icons';
 import Feed from './components/Feed';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import SlideUp from './components/SlideUp';
-import WriteIcon from './components/WriteIcon';
 
 const loggedUserId = 1;
 
