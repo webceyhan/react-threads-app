@@ -1,6 +1,16 @@
-import { ago } from '../utils';
+import { ago, fetchApi } from '../utils';
 
 export default function Thread({ user, thread, setViewSlideUp }) {
+    const handleLike = async () => {
+        thread.likes.push({ uuid: user.uuid });
+
+        await fetchApi(`threads/${thread.id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(thread),
+        });
+    };
+
     return (
         <article className="feed-card">
             <div className="text-container">
@@ -20,6 +30,7 @@ export default function Thread({ user, thread, setViewSlideUp }) {
             <div className="icons">
                 {/* like */}
                 <svg
+                    onClick={handleLike}
                     clipRule="evenodd"
                     fillRule="evenodd"
                     strokeLinejoin="round"
