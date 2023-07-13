@@ -119,6 +119,24 @@
       "replyTo": 3,
       "text": "I want to try it too!",
       "likes": []
+    },
+    {
+      "id": 6,
+      "timestamp": "2023-07-13T10:30:00.000Z",
+      "from": "f5df573f-7a45-40ff-b7da-c84712d32772",
+      "to": "4b71de91-c055-4702-9818-11b950bac194",
+      "replyTo": 1,
+      "text": "Awesome, you are the best!",
+      "likes": []
+    },
+    {
+      "id": 7,
+      "timestamp": "2023-07-13T11:45:00.000Z",
+      "from": "9a6e406e-44a7-4430-acce-62145189496a",
+      "to": "4b71de91-c055-4702-9818-11b950bac194",
+      "replyTo": 1,
+      "text": "Well done!, I've done it yesterday as well.",
+      "likes": []
     }
   ]
 }
