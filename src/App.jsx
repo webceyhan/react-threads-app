@@ -46,22 +46,22 @@ export default function App() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 from: user.uuid,
-                to: null,
-                replyTo: null,
+                to: selectedThread?.from ?? null,
+                replyTo: selectedThread.id ?? null,
                 text,
                 timestamp: new Date().toISOString(),
                 likes: [],
             }),
         });
 
-        // add new thread to the top of the list
+        // add new standalone thread to the top of the list
         setThreads([thread, ...threads]);
 
-        // reset text input
-        setText('');
+        // reload threads if replying to a thread
+        selectedThread && loadThreads();
 
-        // close slideup
-        setViewSlideUp(false);
+        setText(''); // reset text input
+        setViewSlideUp(false); // close slideup
     };
 
     const handleSlideUpToggle = () => {
