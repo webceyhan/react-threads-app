@@ -1,6 +1,6 @@
 <!-- AUTOMATION BADGES -->
 
-[![CodeQL](https://github.com/webceyhan/react-threads-app/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/webceyhan/react-threads-app/actions/workflows/codeql-analysis.yml)
+[![CodeQL](https://github.com/webceyhan/react-threads-app/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/webceyhan/react-threads-app/actions/workflows/github-code-scanning/codeql)
 [![Build and Deploy](https://github.com/webceyhan/react-threads-app/actions/workflows/netlify-deploy.yml/badge.svg)](https://github.com/webceyhan/react-threads-app/actions/workflows/netlify-deploy.yml)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e28e4e68-5bab-4837-9f4e-4550d48ef5b6/deploy-status)](https://app.netlify.com/sites/react-threads-app-app/deploys)
 
