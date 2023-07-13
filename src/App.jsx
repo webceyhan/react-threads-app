@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { createThread, findThreadsByUser, findRepliesByThread } from './api';
+import { createThread, findRepliesByThread } from './api';
 import { useAuth } from './providers/AuthProvider';
+import { useFeed } from './providers/FeedProvider';
 import { WriteIcon } from './icons';
 import Feed from './components/Feed';
 import Header from './components/Header';
@@ -9,18 +10,14 @@ import SlideUp from './components/SlideUp';
 
 export default function App() {
     const { user } = useAuth();
+    const { threads, setThreads, loadThreads } = useFeed();
 
-    const [threads, setThreads] = useState([]);
     const [filteredThreads, setFilteredThreads] = useState([]);
     const [selectedThread, setSelectedThread] = useState(null);
     const [selectedThreadReplies, setSelectedThreadReplies] = useState([]);
     const [viewThreadsFeed, setViewThreadsFeed] = useState(true);
     const [viewSlideUp, setViewSlideUp] = useState(false);
     const [text, setText] = useState('');
-
-    const loadThreads = async () => {
-        setThreads(await findThreadsByUser(user?.uuid));
-    };
 
     const loadFilteredThreads = () => {
         if (viewThreadsFeed) {
@@ -56,10 +53,6 @@ export default function App() {
         setSelectedThread(null);
         setViewSlideUp(!viewSlideUp);
     };
-
-    useEffect(() => {
-        loadThreads();
-    }, [user]);
 
     useEffect(() => {
         loadFilteredThreads();
