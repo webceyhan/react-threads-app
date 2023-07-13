@@ -120,7 +120,7 @@ button.primary {
 
 .feed {
     height: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .feed-card {
@@ -179,6 +179,11 @@ button.primary {
 
 .slideup-toggle svg {
     height: 40px;
+}
+
+.slideup .feed {
+    height: auto;
+    max-height: 450px;
 }
 
 .liked {

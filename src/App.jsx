@@ -12,6 +12,8 @@ export default function App() {
     const [user, setUser] = useState(null);
     const [threads, setThreads] = useState([]);
     const [filteredThreads, setFilteredThreads] = useState([]);
+    const [selectedThread, setSelectedThread] = useState(null);
+    const [selectedThreadReplies, setSelectedThreadReplies] = useState([]);
     const [viewThreadsFeed, setViewThreadsFeed] = useState(true);
     const [viewSlideUp, setViewSlideUp] = useState(false);
 
@@ -25,10 +27,16 @@ export default function App() {
 
     const loadFilteredThreads = () => {
         if (viewThreadsFeed) {
-            setFilteredThreads(threads.filter(({ to }) => to === null)); // Threads
+            setFilteredThreads(threads.filter(({ to }) => to === null)); // my threads
         } else {
-            setFilteredThreads(threads.filter(({ to }) => to !== null)); // Replies
+            setFilteredThreads(threads.filter(({ to }) => to !== null)); // my replies
         }
+    };
+
+    const loadSelectedThreadReplies = async () => {
+        setSelectedThreadReplies(
+            await fetchApi(`threads?replyTo=${selectedThread?.id}`)
+        );
     };
 
     useEffect(() => {
@@ -42,6 +50,10 @@ export default function App() {
     useEffect(() => {
         loadFilteredThreads();
     }, [threads, viewThreadsFeed]);
+
+    useEffect(() => {
+        loadSelectedThreadReplies();
+    }, [selectedThread]);
 
     return (
         <>
@@ -58,10 +70,15 @@ export default function App() {
                         user={user}
                         threads={filteredThreads}
                         setViewSlideUp={setViewSlideUp}
+                        setSelectedThread={setSelectedThread}
                     />
 
                     {viewSlideUp && (
-                        <SlideUp user={user} setViewSlideUp={setViewSlideUp} />
+                        <SlideUp
+                            user={user}
+                            threads={selectedThreadReplies}
+                            setViewSlideUp={setViewSlideUp}
+                        />
                     )}
 
                     <button

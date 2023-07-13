@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ago, fetchApi } from '../utils';
 
-export default function Thread({ user, thread, setViewSlideUp }) {
+export default function Thread({ user, thread, setViewSlideUp, setSelectedThread }) {
     const [wasLiked, setWasLiked] = useState(false);
 
     useEffect(() => {
@@ -32,6 +32,11 @@ export default function Thread({ user, thread, setViewSlideUp }) {
         }
         updateThread();
         setWasLiked(checkIfLiked());
+    };
+
+    const handleReply = () => {
+        setSelectedThread(thread);
+        setViewSlideUp(true);
     };
 
     return (
@@ -70,7 +75,7 @@ export default function Thread({ user, thread, setViewSlideUp }) {
 
                 {/* comment */}
                 <svg
-                    onClick={() => setViewSlideUp(true)}
+                    onClick={handleReply}
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
