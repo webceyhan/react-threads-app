@@ -3,7 +3,7 @@ const shortenUrl = (url) => {
     return hostname.replace('www.', '') + pathname;
 };
 
-export default function Header({ user }) {
+export default function Header({ user, viewThreadsFeed, setViewThreadsFeed }) {
     return (
         <header>
             <div className="info-container">
@@ -38,8 +38,18 @@ export default function Header({ user }) {
             </button>
 
             <div className="button-container">
-                <button className="active">Threads</button>
-                <button>Replies</button>
+                <button
+                    className={viewThreadsFeed ? 'active' : ''}
+                    onClick={() => setViewThreadsFeed(true)}
+                >
+                    Threads
+                </button>
+                <button
+                    className={!viewThreadsFeed ? 'active' : ''}
+                    onClick={() => setViewThreadsFeed(false)}
+                >
+                    Replies
+                </button>
             </div>
         </header>
     );

@@ -20,22 +20,49 @@ async function fetchApi(path, options) {
 
 export default function App() {
     const [user, setUser] = useState(null);
+    const [threads, setThreads] = useState([]);
+    const [filteredThreads, setFilteredThreads] = useState([]);
+    const [viewThreadsFeed, setViewThreadsFeed] = useState(true);
 
     const loadUser = async () => {
         setUser(await fetchApi(`users/${loggedUserId}`));
+    };
+
+    const loadThreads = async () => {
+        setThreads(await fetchApi(`threads?from=${user?.uuid}`));
+    };
+
+    const loadFilteredThreads = () => {
+        if (viewThreadsFeed) {
+            setFilteredThreads(threads.filter(({ to }) => to === null)); // Threads
+        } else {
+            setFilteredThreads(threads.filter(({ to }) => to !== null)); // Replies
+        }
     };
 
     useEffect(() => {
         loadUser();
     }, []);
 
+    useEffect(() => {
+        loadThreads();
+    }, [user]);
+
+    useEffect(() => {
+        loadFilteredThreads();
+    }, [threads, viewThreadsFeed]);
+
     return (
         <>
             {user && (
                 <div>
                     <Nav url={user.instagramUrl} />
-                    <Header user={user} />
-                    <Feed />
+                    <Header
+                        user={user}
+                        viewThreadsFeed={viewThreadsFeed}
+                        setViewThreadsFeed={setViewThreadsFeed}
+                    />
+                    <Feed user={user} threads={filteredThreads} />
                     {/* <SlideUp /> */}
                 </div>
             )}
