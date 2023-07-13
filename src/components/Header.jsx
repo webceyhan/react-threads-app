@@ -1,19 +1,18 @@
 import { shortenUrl } from '../utils';
+import Avatar from './Avatar';
 
 export default function Header({ user, viewThreadsFeed, setViewThreadsFeed }) {
     return (
-        <header>
+        <header id="profile">
             <div className="info-container">
-                <div className="user-info-container">
+                <div>
                     <h1>{user.name}</h1>
                     <p>
                         {user.handle}
-                        <span className="threads-info">threads.net</span>
+                        <span className="threads-badge">threads.net</span>
                     </p>
                 </div>
-                <div className="img-container">
-                    <img src={user.avatarUrl} alt="avatar" />
-                </div>
+                <Avatar url={user.avatarUrl} />
             </div>
 
             <p>{user.bio}</p>

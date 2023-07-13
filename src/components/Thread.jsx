@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ago, fetchApi } from '../utils';
 import { CommentIcon, LikeIcon, SendIcon, ShareIcon } from '../icons';
+import Avatar from './Avatar';
 
 export default function Thread({
     user,
@@ -57,9 +58,7 @@ export default function Thread({
         <article className="feed-card">
             <div className="text-container">
                 <div className="user-info">
-                    <div className="img-container">
-                        <img src={user.avatarUrl} alt="avatar" />
-                    </div>
+                    <Avatar url={user.avatarUrl} />
                     <p>
                         <strong>{user.handle}</strong>
                     </p>

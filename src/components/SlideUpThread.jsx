@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ago, fetchApi } from '../utils';
+import Avatar from './Avatar';
 
 export default function SlideUpThread({ thread }) {
     const [user, setUser] = useState(null);
@@ -18,9 +19,7 @@ export default function SlideUpThread({ thread }) {
         <article className="feed-card">
             <div className="text-container">
                 <div className="user-info">
-                    <div className="img-container">
-                        <img src={user?.avatarUrl} alt="avatar" />
-                    </div>
+                    <Avatar url={user?.avatarUrl} />
                     <p>
                         <strong>{user?.handle}</strong>
                     </p>

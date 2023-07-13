@@ -47,30 +47,6 @@ nav {
     padding-bottom: 20px;
 }
 
-header .info-container {
-    display: flex;
-    justify-content: space-between;
-}
-
-header .img-container {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-header .img-container img {
-    height: 110%;
-}
-
-header .threads-info {
-    color: var(--secondary-color);
-    background-color: rgba(59, 59, 59, 0.5);
-    font-size: 13px;
-    padding: 3px 6px;
-    border-radius: 20px;
-}
-
 svg {
     width: 24px;
     height: 24px;
@@ -106,6 +82,35 @@ button.primary {
     border-radius: 7px;
 }
 
+.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.avatar img {
+    height: 110%;
+}
+
+#profile .avatar {
+    width: 50px;
+    height: 50px;
+}
+
+#profile .info-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#profile .threads-badge {
+    color: var(--secondary-color);
+    background-color: rgba(59, 59, 59, 0.5);
+    font-size: 13px;
+    padding: 3px 6px;
+    border-radius: 20px;
+}
+
 .button-container button {
     width: 50%;
     border: none;
@@ -137,18 +142,9 @@ button.primary {
     align-items: center;
 }
 
-.feed-card .img-container {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    overflow: hidden;
+.feed-card .avatar {
     margin: 2px 5px 2px 0;
 }
-
-.feed-card .img-container img {
-    height: 110%;
-}
-
 .feed-card .icons svg {
     height: 20px;
     padding: 0 5px;
