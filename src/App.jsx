@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
-import { fetchApi } from './utils';
+import {
+    createThread,
+    findThreadsByUser,
+    findRepliesByThread,
+    findUser,
+} from './api';
 import { WriteIcon } from './icons';
 import Feed from './components/Feed';
 import Header from './components/Header';
@@ -19,11 +24,11 @@ export default function App() {
     const [text, setText] = useState('');
 
     const loadUser = async () => {
-        setUser(await fetchApi(`users/${loggedUserId}`));
+        setUser(await findUser(loggedUserId));
     };
 
     const loadThreads = async () => {
-        setThreads(await fetchApi(`threads?from=${user?.uuid}`));
+        setThreads(await findThreadsByUser(user?.uuid));
     };
 
     const loadFilteredThreads = () => {
@@ -36,22 +41,16 @@ export default function App() {
 
     const loadSelectedThreadReplies = async () => {
         setSelectedThreadReplies(
-            await fetchApi(`threads?replyTo=${selectedThread?.id}`)
+            await findRepliesByThread(selectedThread?.id)
         );
     };
 
     const postThread = async () => {
-        const thread = await fetchApi('threads', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                from: user.uuid,
-                to: selectedThread?.from ?? null,
-                replyTo: selectedThread.id ?? null,
-                text,
-                timestamp: new Date().toISOString(),
-                likes: [],
-            }),
+        const thread = await createThread({
+            from: user.uuid,
+            to: selectedThread?.from ?? null,
+            replyTo: selectedThread.id ?? null,
+            text,
         });
 
         // add new standalone thread to the top of the list

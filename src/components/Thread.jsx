@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ago, fetchApi } from '../utils';
+import { ago } from '../utils';
+import { findRepliesByThread, updateThread } from '../api';
 import { CommentIcon, LikeIcon, SendIcon, ShareIcon } from '../icons';
 import Avatar from './Avatar';
 
@@ -17,18 +18,8 @@ export default function Thread({
         setWasLiked(checkIfLiked());
     }, [thread]);
 
-    const updateThread = async () => {
-        await fetchApi(`threads/${thread.id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(thread),
-        });
-    };
-
     const countReplies = async () => {
-        setRepliesCount(
-            (await fetchApi(`threads?replyTo=${thread.id}`)).length
-        );
+        setRepliesCount((await findRepliesByThread(thread.id)).length);
     };
 
     const checkIfLiked = () => {
@@ -45,7 +36,7 @@ export default function Thread({
             // like
             thread.likes.push({ uuid: user.uuid });
         }
-        updateThread();
+        updateThread(thread);
         setWasLiked(checkIfLiked());
     };
 
