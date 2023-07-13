@@ -128,9 +128,11 @@ button.primary {
     padding: 10px 0;
 }
 
-.feed-card .text-container {
+.feed-card .text-container,
+.feed-card .user-info {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .feed-card .img-container {
@@ -138,6 +140,7 @@ button.primary {
     height: 30px;
     border-radius: 50%;
     overflow: hidden;
+    margin: 2px 5px 2px 0;
 }
 
 .feed-card .img-container img {
