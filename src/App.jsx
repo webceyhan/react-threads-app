@@ -8,7 +8,7 @@ import Nav from './components/Nav';
 import SlideUp from './components/SlideUp';
 
 export default function App() {
-    const { user, loadUser } = useAuth();
+    const { user } = useAuth();
 
     const [threads, setThreads] = useState([]);
     const [filteredThreads, setFilteredThreads] = useState([]);
@@ -56,10 +56,6 @@ export default function App() {
         setSelectedThread(null);
         setViewSlideUp(!viewSlideUp);
     };
-
-    useEffect(() => {
-        loadUser();
-    }, []);
 
     useEffect(() => {
         loadThreads();
