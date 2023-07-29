@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { createThread, findRepliesByThread } from './api';
+import { findRepliesByThread } from './api';
 import { useAuth } from './providers/AuthProvider';
 import { useFeed } from './providers/FeedProvider';
 import { WriteIcon } from './icons';
@@ -10,7 +10,7 @@ import SlideUp from './components/SlideUp';
 
 export default function App() {
     const { user } = useAuth();
-    const { threads, setThreads, loadThreads } = useFeed();
+    const { threads, loadThreads, addThread } = useFeed();
 
     const [filteredThreads, setFilteredThreads] = useState([]);
     const [selectedThread, setSelectedThread] = useState(null);
@@ -32,15 +32,12 @@ export default function App() {
     };
 
     const postThread = async () => {
-        const thread = await createThread({
+        await addThread({
             from: user.uuid,
             to: selectedThread?.from ?? null,
-            replyTo: selectedThread.id ?? null,
+            replyTo: selectedThread?.id ?? null,
             text,
         });
-
-        // add new standalone thread to the top of the list
-        setThreads([thread, ...threads]);
 
         // reload threads if replying to a thread
         selectedThread && loadThreads();
