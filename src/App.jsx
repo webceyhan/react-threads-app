@@ -29,7 +29,7 @@ export default function App() {
     };
 
     const loadSelectedThreadReplies = async () => {
-        setSelectedThreadReplies(await api.findRepliesByThread(selectedThread?.id));
+        setSelectedThreadReplies(await api.threads.findByThread(selectedThread?.id));
     };
 
     const postThread = async () => {

@@ -12,11 +12,11 @@ export const FeedProvider = ({ children }) => {
     const [threads, setThreads] = useState([]);
 
     const loadThreads = async () => {
-        setThreads(await api.findThreadsByUser(user?.uuid));
+        setThreads(await api.threads.findByUser(user?.uuid));
     };
 
     const addThread = async (data) => {
-        const newThread = await api.createThread(data);
+        const newThread = await api.threads.create(data);
         // add new thread to the top of the list
         setThreads([newThread, ...threads]);
     };

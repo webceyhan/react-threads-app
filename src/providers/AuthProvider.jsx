@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     const loadUser = async () => {
-        setUser(await api.findUser(loggedUserId));
+        setUser(await api.users.find(loggedUserId));
     };
 
     useEffect(() => {

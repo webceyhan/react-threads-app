@@ -20,7 +20,7 @@ export default function Thread({
     }, [thread]);
 
     const countReplies = async () => {
-        setRepliesCount((await api.findRepliesByThread(thread.id)).length);
+        setRepliesCount((await api.threads.findByThread(thread.id)).length);
     };
 
     const checkIfLiked = () => {
@@ -37,7 +37,7 @@ export default function Thread({
             // like
             thread.likes.push({ uuid: user.uuid });
         }
-        api.updateThread(thread);
+        api.threads.update(thread);
         setWasLiked(checkIfLiked());
     };
 

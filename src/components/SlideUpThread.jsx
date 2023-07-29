@@ -8,7 +8,7 @@ export default function SlideUpThread({ thread }) {
     const [user, setUser] = useState(null);
 
     const loadUser = async () => {
-        setUser(await api.findUserByUuid(thread.from));
+        setUser(await api.users.findByUuid(thread.from));
     };
 
     useEffect(() => {

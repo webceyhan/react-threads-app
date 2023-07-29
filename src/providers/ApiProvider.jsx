@@ -15,20 +15,6 @@ const BASE_OPTIONS = {
 // query to sort by latest
 const SORT_LATEST = '&_sort=id&_order=desc';
 
-const URLS = {
-    users: {
-        find: (id) => `users/${id}`,
-        findByUuid: (uuid) => `users?uuid=${uuid}`,
-    },
-    threads: {
-        find: (id) => `threads/${id}`,
-        findByUser: (uuid) => `threads?from=${uuid}${SORT_LATEST}`,
-        findByThread: (id) => `threads?replyTo=${id}${SORT_LATEST}`,
-        update: (id) => `threads/${id}`,
-        create: 'threads',
-    },
-};
-
 const fetchApi = async (path, options) => {
     try {
         const response = await fetch(`${BASE_URL}/${path}`, {
@@ -42,44 +28,38 @@ const fetchApi = async (path, options) => {
     }
 };
 
-// RESOURCES ///////////////////////////////////////////////////////////////////////////////////////
+// RESOURCE ACTIONS ////////////////////////////////////////////////////////////////////////////////
 
-const findUser = async (id) => {
-    return await fetchApi(URLS.users.find(id));
-};
+const ACTIONS = {
+    users: {
+        find: (id) => fetchApi(`users/${id}`),
+        findByUuid: async (uuid) =>
+            (await fetchApi(`users?uuid=${uuid}`))[0] ?? null,
+    },
 
-const findUserByUuid = async (uuid) => {
-    return (await fetchApi(URLS.users.findByUuid(uuid)))[0] ?? null;
-};
-
-const findThreadsByUser = async (uuid) => {
-    return await fetchApi(URLS.threads.findByUser(uuid));
-};
-
-const findRepliesByThread = async (id) => {
-    return await fetchApi(URLS.threads.findByThread(id));
-};
-
-const createThread = async (thread) => {
-    return await fetchApi(URLS.threads.create, {
-        method: 'POST',
-        body: JSON.stringify({
-            // from: current user uuid
-            // text: text from input
-            to: null,
-            replyTo: null,
-            timestamp: timestamp(),
-            likes: [],
-            ...thread,
-        }),
-    });
-};
-
-const updateThread = async (thread) => {
-    return await fetchApi(URLS.threads.update(thread.id), {
-        method: 'PUT',
-        body: JSON.stringify(thread),
-    });
+    threads: {
+        find: (id) => fetchApi(`threads/${id}`),
+        findByUser: (uuid) => fetchApi(`threads?from=${uuid}${SORT_LATEST}`),
+        findByThread: (id) => fetchApi(`threads?replyTo=${id}${SORT_LATEST}`),
+        update: (thread) =>
+            fetchApi(`threads/${thread.id}`, {
+                method: 'PUT',
+                body: JSON.stringify(thread),
+            }),
+        create: (thread) =>
+            fetchApi('threads', {
+                method: 'POST',
+                body: JSON.stringify({
+                    // from: current user uuid
+                    // text: text from input
+                    to: null,
+                    replyTo: null,
+                    timestamp: timestamp(),
+                    likes: [],
+                    ...thread,
+                }),
+            }),
+    },
 };
 
 // PROVIDER ////////////////////////////////////////////////////////////////////////////////////////
@@ -90,16 +70,7 @@ export const useApi = () => useContext(ApiContext);
 
 export const ApiProvider = ({ children }) => {
     return (
-        <ApiContext.Provider
-            value={{
-                findUser,
-                findUserByUuid,
-                findThreadsByUser,
-                findRepliesByThread,
-                createThread,
-                updateThread,
-            }}
-        >
+        <ApiContext.Provider value={{ ...ACTIONS }}>
             {children}
         </ApiContext.Provider>
     );
