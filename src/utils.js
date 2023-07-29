@@ -3,6 +3,8 @@ export const shortenUrl = (url) => {
     return hostname.replace('www.', '') + pathname;
 };
 
+export const timestamp = () => new Date().toISOString();
+
 export const ago = (timestamp) => {
     const formatter = new Intl.RelativeTimeFormat('en', { style: 'short' });
 

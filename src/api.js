@@ -1,3 +1,5 @@
+import { timestamp } from './utils';
+
 // base url for all requests
 const BASE_URL = 'http://localhost:3001';
 
@@ -63,7 +65,7 @@ export const createThread = async (thread) => {
             // text: text from input
             to: null,
             replyTo: null,
-            timestamp: new Date().toISOString(),
+            timestamp: timestamp(),
             likes: [],
             ...thread,
         }),
