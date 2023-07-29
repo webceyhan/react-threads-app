@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { findThreadsByUser } from '../api';
+import { createThread, findThreadsByUser } from '../api';
 import { useAuth } from './AuthProvider';
 
 const FeedContext = createContext();
@@ -14,6 +14,12 @@ export const FeedProvider = ({ children }) => {
         setThreads(await findThreadsByUser(user?.uuid));
     };
 
+    const addThread = async (data) => {
+        const newThread = await createThread(data);
+        // add new thread to the top of the list
+        setThreads([newThread, ...threads]);
+    };
+
     useEffect(() => {
         loadThreads();
     }, [user]);
@@ -24,6 +30,7 @@ export const FeedProvider = ({ children }) => {
                 threads,
                 setThreads,
                 loadThreads,
+                addThread,
             }}
         >
             {children}
