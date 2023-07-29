@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
-import { findUserByUuid } from '../api';
+import { useApi } from '../providers/ApiProvider';
 import { ago } from '../utils';
 import Avatar from './Avatar';
 
 export default function SlideUpThread({ thread }) {
+    const api = useApi();
     const [user, setUser] = useState(null);
 
     const loadUser = async () => {
-        setUser(await findUserByUuid(thread.from));
+        setUser(await api.findUserByUuid(thread.from));
     };
 
     useEffect(() => {

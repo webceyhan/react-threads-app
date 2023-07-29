@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { findRepliesByThread } from './api';
+import { useApi } from './providers/ApiProvider';
 import { useAuth } from './providers/AuthProvider';
 import { useFeed } from './providers/FeedProvider';
 import { WriteIcon } from './icons';
@@ -9,6 +9,7 @@ import Nav from './components/Nav';
 import SlideUp from './components/SlideUp';
 
 export default function App() {
+    const api = useApi();
     const { user } = useAuth();
     const { threads, loadThreads, addThread } = useFeed();
 
@@ -28,7 +29,7 @@ export default function App() {
     };
 
     const loadSelectedThreadReplies = async () => {
-        setSelectedThreadReplies(await findRepliesByThread(selectedThread?.id));
+        setSelectedThreadReplies(await api.findRepliesByThread(selectedThread?.id));
     };
 
     const postThread = async () => {

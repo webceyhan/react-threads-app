@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { findUser } from '../api';
+import { useApi } from './ApiProvider';
 
 const loggedUserId = 1;
 
@@ -8,10 +8,11 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
+    const api = useApi();
     const [user, setUser] = useState(null);
 
     const loadUser = async () => {
-        setUser(await findUser(loggedUserId));
+        setUser(await api.findUser(loggedUserId));
     };
 
     useEffect(() => {

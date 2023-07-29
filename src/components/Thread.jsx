@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useApi } from '../providers/ApiProvider';
 import { ago } from '../utils';
-import { findRepliesByThread, updateThread } from '../api';
 import { CommentIcon, LikeIcon, SendIcon, ShareIcon } from '../icons';
 import Avatar from './Avatar';
 
@@ -10,6 +10,7 @@ export default function Thread({
     setViewSlideUp,
     setSelectedThread,
 }) {
+    const api = useApi();
     const [wasLiked, setWasLiked] = useState(false);
     const [repliesCount, setRepliesCount] = useState(0);
 
@@ -19,7 +20,7 @@ export default function Thread({
     }, [thread]);
 
     const countReplies = async () => {
-        setRepliesCount((await findRepliesByThread(thread.id)).length);
+        setRepliesCount((await api.findRepliesByThread(thread.id)).length);
     };
 
     const checkIfLiked = () => {
@@ -36,7 +37,7 @@ export default function Thread({
             // like
             thread.likes.push({ uuid: user.uuid });
         }
-        updateThread(thread);
+        api.updateThread(thread);
         setWasLiked(checkIfLiked());
     };
 

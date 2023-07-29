@@ -1,4 +1,5 @@
-import { timestamp } from './utils';
+import { createContext, useContext } from 'react';
+import { timestamp } from '../utils';
 
 // base url for all requests
 const BASE_URL = 'http://localhost:3001';
@@ -41,23 +42,25 @@ const fetchApi = async (path, options) => {
     }
 };
 
-export const findUser = async (id) => {
+// RESOURCES ///////////////////////////////////////////////////////////////////////////////////////
+
+const findUser = async (id) => {
     return await fetchApi(URLS.users.find(id));
 };
 
-export const findUserByUuid = async (uuid) => {
+const findUserByUuid = async (uuid) => {
     return (await fetchApi(URLS.users.findByUuid(uuid)))[0] ?? null;
 };
 
-export const findThreadsByUser = async (uuid) => {
+const findThreadsByUser = async (uuid) => {
     return await fetchApi(URLS.threads.findByUser(uuid));
 };
 
-export const findRepliesByThread = async (id) => {
+const findRepliesByThread = async (id) => {
     return await fetchApi(URLS.threads.findByThread(id));
 };
 
-export const createThread = async (thread) => {
+const createThread = async (thread) => {
     return await fetchApi(URLS.threads.create, {
         method: 'POST',
         body: JSON.stringify({
@@ -72,9 +75,32 @@ export const createThread = async (thread) => {
     });
 };
 
-export const updateThread = async (thread) => {
+const updateThread = async (thread) => {
     return await fetchApi(URLS.threads.update(thread.id), {
         method: 'PUT',
         body: JSON.stringify(thread),
     });
+};
+
+// PROVIDER ////////////////////////////////////////////////////////////////////////////////////////
+
+const ApiContext = createContext();
+
+export const useApi = () => useContext(ApiContext);
+
+export const ApiProvider = ({ children }) => {
+    return (
+        <ApiContext.Provider
+            value={{
+                findUser,
+                findUserByUuid,
+                findThreadsByUser,
+                findRepliesByThread,
+                createThread,
+                updateThread,
+            }}
+        >
+            {children}
+        </ApiContext.Provider>
+    );
 };
