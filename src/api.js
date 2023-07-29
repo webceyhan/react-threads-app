@@ -12,6 +12,20 @@ const BASE_OPTIONS = {
 // query to sort by latest
 const SORT_LATEST = '&_sort=id&_order=desc';
 
+const URLS = {
+    users: {
+        find: (id) => `users/${id}`,
+        findByUuid: (uuid) => `users?uuid=${uuid}`,
+    },
+    threads: {
+        find: (id) => `threads/${id}`,
+        findByUser: (uuid) => `threads?from=${uuid}${SORT_LATEST}`,
+        findByThread: (id) => `threads?replyTo=${id}${SORT_LATEST}`,
+        update: (id) => `threads/${id}`,
+        create: 'threads',
+    },
+};
+
 const fetchApi = async (path, options) => {
     try {
         const response = await fetch(`${BASE_URL}/${path}`, {
@@ -26,23 +40,23 @@ const fetchApi = async (path, options) => {
 };
 
 export const findUser = async (id) => {
-    return await fetchApi(`users/${id}`);
+    return await fetchApi(URLS.users.find(id));
 };
 
 export const findUserByUuid = async (uuid) => {
-    return (await fetchApi(`users?uuid=${uuid}`))[0] ?? null;
+    return (await fetchApi(URLS.users.findByUuid(uuid)))[0] ?? null;
 };
 
 export const findThreadsByUser = async (uuid) => {
-    return await fetchApi(`threads?from=${uuid}${SORT_LATEST}`);
+    return await fetchApi(URLS.threads.findByUser(uuid));
 };
 
 export const findRepliesByThread = async (id) => {
-    return await fetchApi(`threads?replyTo=${id}${SORT_LATEST}`);
+    return await fetchApi(URLS.threads.findByThread(id));
 };
 
 export const createThread = async (thread) => {
-    return await fetchApi('threads', {
+    return await fetchApi(URLS.threads.create, {
         method: 'POST',
         body: JSON.stringify({
             // from: current user uuid
@@ -57,7 +71,7 @@ export const createThread = async (thread) => {
 };
 
 export const updateThread = async (thread) => {
-    return await fetchApi(`threads/${thread.id}`, {
+    return await fetchApi(URLS.threads.update(thread.id), {
         method: 'PUT',
         body: JSON.stringify(thread),
     });
